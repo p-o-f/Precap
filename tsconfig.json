@@ -1,7 +1,13 @@
 {
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
+    "types": ["@webgpu/types", "@types/dom-chromium-ai"],
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx"
-  }
+  },
+  "include": [
+    ".wxt/wxt.d.ts", // This tells TS where WXT's magic types live
+    "**/*", // This includes all files
+    "types.ts" // This includes custom types
+  ]
 }
