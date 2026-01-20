@@ -1,5 +1,7 @@
 # Precap (temporary readme)
 
+https://developer.chrome.com/docs/ai/built-in-apis#summarizer_api and https://developer.chrome.com/docs/ai/summarizer-api
+
 ### _Get the hook before the click._
 
 **Precap** is an AI-native Chrome extension that transforms how you browse YouTube. Inspired by the editorial experience of platforms like Netflix, Precap provides instant, high-quality video summaries via a hover-interface—allowing you to understand a video's core "premise" before committing your time.

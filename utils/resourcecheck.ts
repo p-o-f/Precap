@@ -12,6 +12,19 @@ export async function checkAiSystemHealth() {
     const versionMatch = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
     const majorVersion = versionMatch ? parseInt(versionMatch[2], 10) : 0;
     results.isVersionSupported = majorVersion >= 128;
+    if ("Summarizer" in self) {
+      // The Summarizer API is supported.
+      console.log("summarizer supported");
+    } else {
+      console.warn(
+        "❌ Summarizer API is not supported. Did you enable 'Summarization API for Gemini Nano' in chrome://flags?",
+      );
+    }
+    if (!self.ai) {
+      console.warn(
+        "❌ self.ai is undefined. Did you enable 'Prompt API for Gemini Nano' and 'Summarization API for Gemini Nano' in chrome://flags?",
+      );
+    }
 
     // 2. Check Prompt API (Language Model)
     // 2. Check Prompt API (Language Model)
