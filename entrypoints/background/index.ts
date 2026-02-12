@@ -1,3 +1,5 @@
+import { YoutubeTranscript } from "youtube-transcript";
+
 export default defineBackground(async () => {
   console.log("Hello background!", { id: browser.runtime.id });
   console.log("🚀 Starting AI Experiment in Popup...");
@@ -26,5 +28,11 @@ export default defineBackground(async () => {
       "This is a short text example to test this API. Make sure your response is 1 sentence at maximum.",
   });
 
-  console.log(summary);
+  console.log("trying yolo to cloud sumamry toytoubeu");
+  const dummyText2 = "https://www.youtube.com/watch?v=httnhdpu_W4";
+  const summary2 = await summarizer.summarize(dummyText2, {
+    context: "What is the title of this video and a short summary?",
+  });
+  console.log(summary2);
+  console.log("completed!!!");
 });
