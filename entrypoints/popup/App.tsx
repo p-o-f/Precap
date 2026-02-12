@@ -19,6 +19,22 @@ function App() {
 
 async function runAiExperiment() {
   console.log("🚀 Starting AI Experiment in Popup...");
+  const availability = await Summarizer.availability();
+  if (availability === "unavailable") {
+    // The Summarizer API isn't usable.
+    return;
+  } else {
+    console.log("Available!!!!!!");
+  }
+  // Proceed to request batch or streaming summarization
+  const summarizer = await Summarizer.create({
+    monitor(m) {
+      m.addEventListener("downloadprogress", (e) => {
+        console.log(`Downloaded ${e.loaded * 100}%`);
+      });
+    },
+  });
+  console.log("Availability:", availability);
 
   if (!window.ai) {
     console.error("❌ window.ai is undefined. Enable flags in chrome://flags.");
