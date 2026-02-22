@@ -24,7 +24,7 @@ export default defineBackground(async () => {
     console.log("📋 Settings changed:", newSettings);
   });
 
-  // Proceed to request batch or streaming summarization
+  // // Proceed to request batch or streaming summarization
   const summarizer = await Summarizer.create({
     monitor(m) {
       m.addEventListener("downloadprogress", (e) => {
@@ -34,14 +34,6 @@ export default defineBackground(async () => {
   });
 
   console.log("Availability:", availability);
-
-  const dummyText =
-    "PwC is restricting where entry-level consultants can begin their careers. The Big Four firms are facing mounting pressure to retrain workers as consulting projects increasingly focus on implementing AI tools rather than traditional research.";
-  const summary = await summarizer.summarize(dummyText, {
-    context:
-      "This is a short text example to test this API. Make sure your response is 1 sentence at maximum.",
-  });
-
   console.log("trying yolo to cloud sumamry toytoubeu");
   const dummyText2 = "https://www.youtube.com/watch?v=httnhdpu_W4";
   const summary2 = await summarizer.summarize(dummyText2, {
@@ -49,6 +41,27 @@ export default defineBackground(async () => {
   });
   console.log(summary2);
   console.log("completed!!!");
+  // console.log("trying yolo to cloud sumamry toytoubeu");
+  // const dummyText2 = "https://youtu.be/httnhdpu_W4";
+  // console.log(await summarizeUrl(dummyText2, "key-points", "medium", "give me the title of the video"));
+  // console.log("completed!!!");
 });
 
 // todo https://developer.chrome.com/docs/ai/scale-summarization and chrome://on-device-internals/ <-- just reference this for docs l8r
+
+const summarizeUrl = async (url: string, type: "tldr" | "teaser" | "key-points" | "headline", length: "short" | "medium" | "long", ctx?: string) => {
+  const summarizer = await Summarizer.create({
+  sharedContext: "This is a YouTube video",
+  type: type,     // "tldr" | "teaser" | etc.
+  length: length, // "short" | "medium" | "long"
+  format: "plain-text",
+});
+
+
+const result = await summarizer.summarize(url, {
+  context: ctx || "summarize this youtube video and give me the title of it",
+});
+
+summarizer.destroy(); // free up resources
+return result;
+}
