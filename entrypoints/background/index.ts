@@ -89,4 +89,5 @@ YoutubeTranscript.fetchTranscript('EpSmQa7UyA0').then(console.log);
 // TODO
 
 // https://github.com/Kakulukian/youtube-transcript/issues/45#issuecomment-2906780325 <--------
+// https://github.com/Kakulukian/youtube-transcript/issues/45#issuecomment-2924659026 <--------
 
