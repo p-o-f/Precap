@@ -1,5 +1,6 @@
 import { checkSystemResources } from "@/utils/resourcecheck";
 import { KeepAliveService } from "@/utils/keepalive";
+import { settingsStorage } from "@/utils/storage";
 export default defineBackground(async () => {
   console.log("Hello background!", { id: browser.runtime.id });
   KeepAliveService.start();
@@ -13,6 +14,16 @@ export default defineBackground(async () => {
   } else {
     console.log("Available!!!!!!");
   }
+
+  // Log current settings
+  const currentSettings = await settingsStorage.getValue();
+  console.log("📋 Current Settings:", currentSettings);
+
+  // Watch for future setting changes
+  settingsStorage.watch((newSettings) => {
+    console.log("📋 Settings changed:", newSettings);
+  });
+
   // Proceed to request batch or streaming summarization
   const summarizer = await Summarizer.create({
     monitor(m) {
@@ -40,4 +51,4 @@ export default defineBackground(async () => {
   console.log("completed!!!");
 });
 
-// todo https://developer.chrome.com/docs/ai/scale-summarization
+// todo https://developer.chrome.com/docs/ai/scale-summarization and chrome://on-device-internals/ <-- just reference this for docs l8r

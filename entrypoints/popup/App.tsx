@@ -27,11 +27,10 @@ function App() {
 
   return (
     <>
-      <h1>Gemini Nano Test</h1>
+      <h1>Precap</h1>
       <div className="card">
-        <button onClick={runAiExperiment}>Run AI Experiment</button>
         <button onClick={openSettings}>Settings</button>
-        <p>Check the console (Right-Click &rarr; Inspect) for output.</p>
+        <p>Go to settings to change summary type and length, and check if your system configuration is supported.</p>
         <hr />
         <p style={{ textAlign: "left", fontSize: "0.8em", marginTop: "1em" }}>
           <strong>SELECTED OPTIONS:</strong> <br />
@@ -65,6 +64,8 @@ async function runAiExperiment() {
   // });
   // console.log("Availability:", availability);
 
+
+  //TODO look at this VVV
   if (!window.ai) {
     console.error("❌ window.ai is undefined. Enable flags in chrome://flags.");
     return;
