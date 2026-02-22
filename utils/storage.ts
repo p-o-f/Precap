@@ -1,16 +1,15 @@
 
+export type SummaryType = "tldr" | "teaser" | "key-points" | "headline";
+export type SummaryLength = "short" | "medium" | "long";
+
 export interface Settings {
-  autoReload: boolean;
-  showBlockedCount: boolean;
-  strictBlocking: boolean;
-  developerMode: boolean;
+  summaryType: SummaryType;
+  summaryLength: SummaryLength;
 }
 
 export const defaultSettings: Settings = {
-  autoReload: true,
-  showBlockedCount: true,
-  strictBlocking: true,
-  developerMode: false,
+  summaryType: "tldr",
+  summaryLength: "medium",
 };
 
 export const settingsStorage = storage.defineItem<Settings>("sync:settings", {

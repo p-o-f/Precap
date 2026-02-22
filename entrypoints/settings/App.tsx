@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { settingsStorage, defaultSettings, type Settings } from "@/utils/storage";
+import { settingsStorage, defaultSettings, type Settings, type SummaryType, type SummaryLength } from "@/utils/storage";
 
 function App() {
   const [settings, setSettings] = useState<Settings>(defaultSettings);
 
   useEffect(() => {
-    // Load initial settings
     settingsStorage.getValue().then((val) => {
-        setSettings(val ?? defaultSettings);
+      setSettings(val ?? defaultSettings);
     });
 
-    // Subscribe to changes (e.g. from other tabs)
     const unwatch = settingsStorage.watch((newVal) => {
       setSettings(newVal ?? defaultSettings);
     });
@@ -18,79 +16,56 @@ function App() {
     return () => unwatch();
   }, []);
 
-  const updateSetting = async (key: keyof Settings, value: boolean) => {
+  const updateSetting = async <K extends keyof Settings>(key: K, value: Settings[K]) => {
     const newSettings = { ...settings, [key]: value };
-    setSettings(newSettings); // Optimistic update
+    setSettings(newSettings);
     await settingsStorage.setValue(newSettings);
   };
 
   return (
     <>
-      <h2>Behavior</h2>
-      <div className="checkbox-group">
-        
-        <div className="checkbox-item">
-          <input
-            type="checkbox"
-            id="autoReload"
-            checked={settings.autoReload}
-            onChange={(e) => updateSetting("autoReload", e.target.checked)}
-          />
-          <div className="checkbox-content">
-            <label htmlFor="autoReload" className="checkbox-label">
-              Automatically reload page when changing filtering mode
-            </label>
-          </div>
+      <h2>Summary Settings</h2>
+      <div className="dropdown-group">
+
+        <div className="dropdown-item">
+          <label htmlFor="summaryType" className="dropdown-label">
+            Summary Type
+          </label>
+          <select
+            id="summaryType"
+            value={settings.summaryType}
+            onChange={(e) => updateSetting("summaryType", e.target.value as SummaryType)}
+          >
+            <option value="tldr">TL;DR</option>
+            <option value="teaser">Teaser</option>
+            <option value="key-points">Key Points</option>
+            <option value="headline">Headline</option>
+          </select>
         </div>
 
-        <div className="checkbox-item">
-          <input
-            type="checkbox"
-            id="showBlockedCount"
-            checked={settings.showBlockedCount}
-            onChange={(e) => updateSetting("showBlockedCount", e.target.checked)}
-          />
-          <div className="checkbox-content">
-            <label htmlFor="showBlockedCount" className="checkbox-label">
-              Show the number of blocked requests on the toolbar icon
-            </label>
-          </div>
+        <div className="dropdown-item">
+          <label htmlFor="summaryLength" className="dropdown-label">
+            Summary Length
+          </label>
+          <select
+            id="summaryLength"
+            value={settings.summaryLength}
+            onChange={(e) => updateSetting("summaryLength", e.target.value as SummaryLength)}
+          >
+            <option value="short">Short</option>
+            <option value="medium">Medium</option>
+            <option value="long">Long</option>
+          </select>
         </div>
 
-        <div className="checkbox-item">
-          <input
-            type="checkbox"
-            id="strictBlocking"
-            checked={settings.strictBlocking}
-            onChange={(e) => updateSetting("strictBlocking", e.target.checked)}
-          />
-          <div className="checkbox-content">
-            <label htmlFor="strictBlocking" className="checkbox-label">
-              Enable strict blocking
-            </label>
-            <div className="checkbox-description">
-              Navigation to potentially undesirable sites will be blocked, and you will be offered the option to proceed.
-            </div>
-          </div>
-        </div>
+      </div>
 
-        <div className="checkbox-item">
-          <input
-            type="checkbox"
-            id="developerMode"
-            checked={settings.developerMode}
-            onChange={(e) => updateSetting("developerMode", e.target.checked)}
-          />
-          <div className="checkbox-content">
-            <label htmlFor="developerMode" className="checkbox-label">
-              Developer mode
-            </label>
-            <div className="checkbox-description">
-              Enables access to features suitable for technical users.
-            </div>
-          </div>
+      <h2 style={{ marginTop: "2.5rem" }}>System Check</h2>
+      <div className="dropdown-group">
+        <div className="dropdown-item">
+          <span className="dropdown-label">Chrome Version</span>
+          <span>temp</span>
         </div>
-
       </div>
     </>
   );

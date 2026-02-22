@@ -1,7 +1,11 @@
-
+import { checkSystemResources } from "@/utils/resourcecheck";
+import { KeepAliveService } from "@/utils/keepalive";
 export default defineBackground(async () => {
   console.log("Hello background!", { id: browser.runtime.id });
-  console.log("🚀 Starting AI Experiment in Popup...");
+  KeepAliveService.start();
+  console.log(checkSystemResources());
+
+
   const availability = await Summarizer.availability();
   if (availability === "unavailable") {
     // The Summarizer API isn't usable.
@@ -35,3 +39,5 @@ export default defineBackground(async () => {
   console.log(summary2);
   console.log("completed!!!");
 });
+
+// todo https://developer.chrome.com/docs/ai/scale-summarization
