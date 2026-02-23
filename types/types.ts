@@ -1,3 +1,4 @@
+// Triple slash directives for Chromium AI API and WebGPU API
 /// <reference types="@types/dom-chromium-ai" />
 /// <reference types="@webgpu/types" />
 

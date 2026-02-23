@@ -15,10 +15,15 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
+    "@danielxceron/youtube-transcript": "^1.2.6",
     "@webext-core/messaging": "^2.3.0",
+    "minimatch": "^10.2.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "youtube-transcript": "^1.2.1"
+    "youtube-transcript": "^1.2.1",
+    "youtube-transcript-api": "^3.0.6",
+    "youtube-transcript-plus": "^1.2.0",
+    "youtubei.js": "^16.0.1"
   },
   "devDependencies": {
     "@types/dom-chromium-ai": "^0.0.13",

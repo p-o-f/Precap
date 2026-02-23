@@ -1,8 +1,7 @@
 import { checkSystemResources } from "@/utils/resourcecheck";
 import { KeepAliveService } from "@/utils/keepalive";
 import { settingsStorage } from "@/utils/storage";
-
-import { YoutubeTranscript } from 'youtube-transcript';
+import { fetchTranscript } from 'youtube-transcript-plus';
 
 export default defineBackground(async () => {
   console.log("Hello background!", { id: browser.runtime.id });
@@ -49,7 +48,8 @@ export default defineBackground(async () => {
   // console.log(await summarizeUrl(dummyText2, "key-points", "medium", "give me the title of the video"));
   // console.log("completed!!!");
   transcribe();
-  YoutubeTranscript.fetchTranscript('-q2n5DkDoMQ').then(console.log);
+fetchTranscript('httnhdpu_W4').then(console.log).catch(console.error);
+
 
 });
 
@@ -65,7 +65,7 @@ const summarizeUrl = async (url: string, type: "tldr" | "teaser" | "key-points" 
 
 
 const result = await summarizer.summarize(url, {
-  context: ctx || "summarize this youtube video and give me the title of it",
+  context: ctx || "summarize this YouTube video",
 });
 
 summarizer.destroy(); // free up resources
@@ -81,7 +81,13 @@ function transcribe() {
 //     console.error(err);
 //   }
 // })();
-YoutubeTranscript.fetchTranscript('EpSmQa7UyA0').then(console.log);
+//YoutubeTranscript.fetchTranscript('EpSmQa7UyA0').then(console.log);
+  fetchTranscript('ODGBUYvIMVE', {
+  userAgent:
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+})
+  .then(console.log)
+  .catch(console.error);
 
 }
 

@@ -4,6 +4,7 @@ import wxtLogo from "/wxt.svg";
 import "./App.css";
 import { browser } from "wxt/browser";
 import { settingsStorage, defaultSettings, type Settings } from "@/utils/storage";
+import { YoutubeTranscript } from "@danielxceron/youtube-transcript";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,6 +30,7 @@ function App() {
     <>
       <h1>Precap</h1>
       <div className="card">
+        <button onClick={runAiExperiment}>Run AI Experiment</button>
         <button onClick={openSettings}>Settings</button>
         <p>Go to settings to change summary type and length, and check if your system configuration is supported.</p>
         <hr />
@@ -47,6 +49,7 @@ function openSettings() {
 
 async function runAiExperiment() {
   console.log("🚀 Starting AI Experiment in Popup...");
+  YoutubeTranscript.fetchTranscript('I2v5lHNfCi8').then(console.log);
   // const availability = await Summarizer.availability();
   // if (availability === "unavailable") {
   //   // The Summarizer API isn't usable.
