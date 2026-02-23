@@ -94,6 +94,7 @@ function transcribe() {
 
 // FIX FOR LATER
 // TODO
+// TRY THESE: https://www.npmjs.com/search?q=youtube%20transcript 
 
 // https://github.com/Kakulukian/youtube-transcript/issues/45#issuecomment-2906780325 <--------
 // https://github.com/Kakulukian/youtube-transcript/issues/45#issuecomment-2924659026 <--------
