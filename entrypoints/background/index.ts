@@ -3,6 +3,7 @@ import { KeepAliveService } from "@/utils/keepalive";
 import { settingsStorage } from "@/utils/storage";
 import { fetchTranscript } from 'youtube-transcript-plus';
 
+
 export default defineBackground(async () => {
   console.log("Hello background!", { id: browser.runtime.id });
   KeepAliveService.start();
@@ -48,7 +49,7 @@ export default defineBackground(async () => {
   // console.log(await summarizeUrl(dummyText2, "key-points", "medium", "give me the title of the video"));
   // console.log("completed!!!");
   transcribe();
-fetchTranscript('httnhdpu_W4').then(console.log).catch(console.error);
+fetchTranscript('https://www.youtube.com/watch?v=N0DTBIhRDuc').then(console.log).catch(console.error);
 
 
 });
