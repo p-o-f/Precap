@@ -1,4 +1,4 @@
-# Precap (temporary readme)
+# Precap [DEAD AND DISCONTINUED FOR FORSEEABLE FUTURE DUE TO BEING UNABLE TO GET YOUTUBE TRANSCRIPTS FROM BROWSER RUNTIME CONTEXT]
 
 ### _Get the hook before the click._
 
